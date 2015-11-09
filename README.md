@@ -2,18 +2,69 @@
 
 ![Alt text](http://g.gravizo.com/g?
   digraph G {
-    aize ="4,4";
-    main [shape=box];
-    main -> parse [weight=8];
-    parse -> execute;
-    main -> init [style=dotted];
-    main -> cleanup;
-    execute -> { make_string; printf}
-    init -> make_string;
-    edge [color=red];
-    main -> printf [style=bold,label="100 times"];
-    make_string [label="make a string"];
-    node [shape=box,style=filled,color=".7 .3 1.0"];
-    execute -> compare;
+    @startuml
+
+title Parkhaus Class Diagram
+
+interface CarParkInterface {
+}
+
+class CarPark implements CarParkInterface {
+int carCounter
+Map/ArrayList cars
+
++ payCash()
++ payCard()
++ createTicket()
+
++ {static} int salesVolume()
++ {static} int meanParkingTime()
++ {static} int freeLots()
+}
+
+class CarParkEnterprise extends CarPark {
++ payEnterprise()
+}
+
+class Car {
+int id
+LocalTime enterTime
+LocalTIme leaveTime
+boolean isEnterpriseCustomer
+
++ Car(int number)
++ long getSeconds()
+
++ enterCarPark()
++ leaveCarPark()
+diese beiden Methoden
+rufen die Req-Handler auf
+}
+
+
+class RequestHandler implements HttpHandler {
++ void handle(HttpExchange he)
+}
+
+class EnterRequestHandler implements RequestHandler {
++ void handle(HttpExchange he)
+}
+
+class LeaveRequestHandler implements RequestHandler {
++ void handle(HttpExchange he)
+}
+
+class HttpCarServer {
+- int port = 8182
++ HttpCarServer(int port)
+
++ void start()
+}
+
+class Main {
++ {static} void main(String[] args)
+}
+
+@enduml
   }
 )
